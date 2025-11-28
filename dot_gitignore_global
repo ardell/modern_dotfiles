@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Vim
+*.swp
+*.swo
+*~
+.*.sw[a-z]
+*.un~
+Session.vim
+
+# Editor directories
+.vscode/
+.idea/
+
+# Claude Code
+.claude/
+.clinerules
+
+# Environment variables
+.env
+.env.local
+.envrc.local
+
+# Misc
+.direnv/

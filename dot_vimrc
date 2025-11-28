@@ -1,0 +1,163 @@
+" ============================================================================
+" Modern Minimal Vim Configuration
+" ============================================================================
+
+set nocompatible
+filetype off
+
+" ============================================================================
+" vim-plug setup
+" Install vim-plug if not present:
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"
+" Then run :PlugInstall to install plugins
+" ============================================================================
+
+call plug#begin('~/.vim/plugged')
+
+" Essential plugins
+Plug 'tpope/vim-surround'           " cs, ds, ys for surrounding text
+Plug 'tpope/vim-commentary'         " gc to comment/uncomment
+Plug 'tpope/vim-repeat'             " Make plugin commands repeatable with .
+
+" Fuzzy finder - replaces FuzzyFinder, NERDTree, etc.
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" CamelCase motion - for shift+e, shift+w, etc.
+Plug 'bkad/CamelCaseMotion'
+
+" Language support (includes Elixir, ActionScript, and 600+ others)
+Plug 'sheerun/vim-polyglot'
+
+" Async linting
+Plug 'dense-analysis/ale'
+
+call plug#end()
+
+" ============================================================================
+" General settings
+" ============================================================================
+filetype plugin indent on
+syntax enable
+
+set encoding=utf-8
+set backspace=indent,eol,start
+
+" Visual
+set number                          " Show line numbers
+set ruler                           " Show cursor position
+set showcmd                         " Show command in bottom bar
+set showmatch                       " Highlight matching brackets
+set wildmenu                        " Visual autocomplete for command menu
+
+" Searching
+set incsearch                       " Search as you type
+set hlsearch                        " Highlight search matches
+set ignorecase                      " Case insensitive...
+set smartcase                       " ...unless uppercase present
+
+" Indentation
+set autoindent
+set smartindent
+set tabstop=2
+set shiftwidth=2
+set expandtab                       " Spaces, not tabs
+set smarttab
+
+" Performance
+set lazyredraw
+set ttyfast
+
+" No backup files cluttering directories
+set nobackup
+set nowritebackup
+set noswapfile
+
+" Persistent undo
+set undofile
+set undodir=~/.vim/undo
+if !isdirectory(&undodir)
+  silent! call mkdir(&undodir, 'p')
+endif
+
+" ============================================================================
+" Key mappings
+" ============================================================================
+let mapleader = ","
+
+" Tab navigation with 8 and 9
+nnoremap 8 :tabprev<CR>
+nnoremap 9 :tabnext<CR>
+
+" CamelCase motion - map to shift+w, shift+e, shift+b
+map <silent> W <Plug>CamelCaseMotion_w
+map <silent> B <Plug>CamelCaseMotion_b
+map <silent> E <Plug>CamelCaseMotion_e
+map <silent> gE <Plug>CamelCaseMotion_ge
+sunmap W
+sunmap B
+sunmap E
+sunmap gE
+
+" Operator-pending mappings for camelcase (e.g., dW, cE)
+omap <silent> iW <Plug>CamelCaseMotion_iw
+omap <silent> iB <Plug>CamelCaseMotion_ib
+omap <silent> iE <Plug>CamelCaseMotion_ie
+xmap <silent> iW <Plug>CamelCaseMotion_iw
+xmap <silent> iB <Plug>CamelCaseMotion_ib
+xmap <silent> iE <Plug>CamelCaseMotion_ie
+
+" fzf fuzzy finder
+nnoremap <C-p> :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>r :Rg<CR>
+nnoremap <leader>l :Lines<CR>
+
+" Clear search highlighting
+nnoremap <leader><space> :nohlsearch<CR>
+
+" Quick save and quit
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+
+" ============================================================================
+" Plugin settings
+" ============================================================================
+
+" ALE linting
+let g:ale_linters = {
+\   'elixir': ['credo', 'elixir-ls'],
+\   'javascript': ['eslint'],
+\   'python': ['ruff'],
+\}
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'elixir': ['mix_format'],
+\   'javascript': ['prettier'],
+\   'python': ['ruff_format'],
+\}
+let g:ale_fix_on_save = 0           " Don't auto-fix (run :ALEFix manually)
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
+
+" fzf
+let g:fzf_layout = { 'down': '40%' }
+" Respect .gitignore if using fd or ripgrep
+if executable('fd')
+  let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow --exclude .git'
+endif
+
+" ============================================================================
+" File type specific settings
+" ============================================================================
+autocmd FileType python setlocal tabstop=4 shiftwidth=4
+autocmd FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType make setlocal noexpandtab
+
+" ============================================================================
+" Color scheme
+" ============================================================================
+set background=dark
+colorscheme default

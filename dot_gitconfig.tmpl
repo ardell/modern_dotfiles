@@ -1,0 +1,64 @@
+[user]
+	name = {{ .name }}
+	email = {{ .email }}
+{{- if .signingkey }}
+	signingkey = {{ .signingkey }}
+{{- end }}
+
+{{- if .signingkey }}
+[commit]
+	gpgsign = true
+{{- end }}
+
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = vim
+	pager = less
+	whitespace = trailing-space,space-before-tab,tab-in-indent
+	autocrlf = false
+
+[color]
+	ui = auto
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+	lg = log --graph --decorate --date=relative --abbrev-commit --pretty=format:'%Cred%h%Creset [%an]%C(yellow)%d%Creset %s %Cgreen(%ar)%Creset'
+	recent = reflog -20 --date=relative
+
+[push]
+	default = current
+	autoSetupRemote = true
+
+[pull]
+	rebase = false
+
+[branch]
+	autosetuprebase = always
+
+[merge]
+	summary = true
+	tool = opendiff
+	conflictstyle = zdiff3
+
+[diff]
+	algorithm = histogram
+	colorMoved = default
+
+[rerere]
+	enabled = true
+
+[init]
+	defaultBranch = main
+
+[fetch]
+	prune = true
+
+[gc]
+	pruneExpire = "1 week ago"

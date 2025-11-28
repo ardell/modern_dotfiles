@@ -1,0 +1,18 @@
+# Mise global configuration
+# Project-specific versions go in project .mise.toml or .tool-versions
+
+[settings]
+# Use symlinks for Go to avoid rebuilding
+go_default_packages_file = "~/.default-go-packages"
+
+# Always keep downloaded versions
+always_keep_download = true
+
+# Verbose output for debugging
+verbose = false
+
+[tools]
+# Uncomment and set global versions if desired
+# node = "20"
+# python = "3.12"
+# go = "1.22"

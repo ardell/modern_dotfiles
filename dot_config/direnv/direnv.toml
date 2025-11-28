@@ -1,0 +1,6 @@
+[global]
+# Load direnvrc from XDG config if it exists
+load_dotenv = true
+
+# Increase timeout for slow commands
+warn_timeout = "30s"
