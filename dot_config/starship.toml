@@ -13,9 +13,9 @@ right_format = "$git_branch$git_status"
 add_newline = false
 
 [character]
-success_symbol = "[\\$](green) "
-error_symbol = "[\\$](red) "
-vimcmd_symbol = "[\\$](green) "
+success_symbol = "[\\$](green)"
+error_symbol = "[\\$](red)"
+vimcmd_symbol = "[\\$](green)"
 
 [directory]
 truncation_length = 0  # Show full path
