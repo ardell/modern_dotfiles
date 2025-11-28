@@ -28,7 +28,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 1. Install dotfiles with chezmoi:
 
 ```bash
-chezmoi init --apply https://github.com/YOUR_USERNAME/modern_dotfiles.git
+chezmoi init --apply https://github.com/ardell/modern_dotfiles.git
 ```
 
 You'll be prompted for:
