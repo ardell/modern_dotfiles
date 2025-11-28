@@ -46,7 +46,7 @@ set encoding=utf-8
 set backspace=indent,eol,start
 
 " Visual
-set number                          " Show line numbers
+set nonumber                        " Don't show line numbers by default
 set ruler                           " Show cursor position
 set showcmd                         " Show command in bottom bar
 set showmatch                       " Highlight matching brackets
