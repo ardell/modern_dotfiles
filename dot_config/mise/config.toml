@@ -11,8 +11,12 @@ always_keep_download = true
 # Verbose output for debugging
 verbose = false
 
+# Build Python from source instead of using precompiled binaries
+python_compile = true
+
 [tools]
-# Uncomment and set global versions if desired
+# Global default versions
+ruby = "3.4.7"
+python = "3.12"
 # node = "20"
-# python = "3.12"
 # go = "1.22"
