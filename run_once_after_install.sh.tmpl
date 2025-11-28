@@ -1,0 +1,54 @@
+#!/bin/bash
+# This script runs once after chezmoi applies dotfiles for the first time
+
+set -e
+
+echo "🔧 Setting up oh-my-zsh plugins..."
+
+# Install zsh-autosuggestions
+if [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    echo "✓ Installed zsh-autosuggestions"
+else
+    echo "✓ zsh-autosuggestions already installed"
+fi
+
+# Install zsh-syntax-highlighting
+if [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    echo "✓ Installed zsh-syntax-highlighting"
+else
+    echo "✓ zsh-syntax-highlighting already installed"
+fi
+
+echo ""
+echo "📝 Setting up vim..."
+
+# Install vim-plug
+if [ ! -f ~/.vim/autoload/plug.vim ]; then
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    echo "✓ Installed vim-plug"
+else
+    echo "✓ vim-plug already installed"
+fi
+
+# Install vim plugins
+if [ -f ~/.vim/autoload/plug.vim ]; then
+    vim +PlugInstall +qall
+    echo "✓ Installed vim plugins"
+fi
+
+echo ""
+echo "🔍 Setting up fzf key bindings..."
+
+# Install fzf key bindings if fzf is installed via Homebrew
+if command -v brew &> /dev/null && [ -f "$(brew --prefix)/opt/fzf/install" ]; then
+    $(brew --prefix)/opt/fzf/install --key-bindings --completion --no-update-rc
+    echo "✓ Installed fzf key bindings"
+else
+    echo "⚠ fzf not found via Homebrew, skipping key bindings setup"
+fi
+
+echo ""
+echo "✅ Setup complete! Run 'exec zsh' to reload your shell."

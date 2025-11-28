@@ -25,7 +25,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 ### Fresh Setup
 
-1. Install dotfiles with chezmoi:
+Install dotfiles with chezmoi:
 
 ```bash
 chezmoi init --apply https://github.com/ardell/modern_dotfiles.git
@@ -36,33 +36,12 @@ You'll be prompted for:
 - Git email address
 - GPG signing key (optional, leave empty to skip)
 
-2. Install oh-my-zsh plugins:
+The setup script will automatically:
+- Install oh-my-zsh plugins (autosuggestions, syntax highlighting)
+- Install vim-plug and vim plugins
+- Setup fzf key bindings
 
-```bash
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-```
-
-3. Install vim-plug:
-
-```bash
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-```
-
-4. Install vim plugins:
-
-```bash
-vim +PlugInstall +qall
-```
-
-5. Install fzf key bindings:
-
-```bash
-$(brew --prefix)/opt/fzf/install
-```
-
-6. Restart your shell or source the config:
+Then restart your shell:
 
 ```bash
 exec zsh
