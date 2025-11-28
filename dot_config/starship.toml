@@ -1,38 +1,40 @@
 # Starship prompt configuration
-# Docs: https://starship.rs/config/
+# Matches old "ardell" oh-my-zsh theme:
+# Left: green_directory error_code $
+# Right: cyan_git_branch
 
-# Minimal, compact single-line prompt
-format = "$directory$git_branch$git_status$python$nodejs$golang$elixir$character"
+# Format: directory, then character (error status shown in character color)
+format = "$directory$status$character"
+
+# Right-side prompt for git info
+right_format = "$git_branch$git_status"
 
 # Don't add newline before prompt
 add_newline = false
 
 [character]
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
-vimcmd_symbol = "[❮](bold green)"
+success_symbol = "[\\$](green) "
+error_symbol = "[\\$](red) "
+vimcmd_symbol = "[\\$](green) "
 
 [directory]
-truncation_length = 3
-truncate_to_repo = true
-style = "bold cyan"
+truncation_length = 0  # Show full path
+truncate_to_repo = false
+style = "green"
+format = "[$path]($style) "
+
+[status]
+disabled = false
+format = "[$status]($style) "
+style = "red"
 
 [git_branch]
-symbol = " "
-style = "bold purple"
+symbol = ""
+style = "cyan"
+format = "[$branch]($style)"
 
 [git_status]
-style = "bold yellow"
-conflicted = "!"
-ahead = "⇡${count}"
-behind = "⇣${count}"
-diverged = "⇕"
-untracked = "?"
-stashed = "$"
-modified = "~"
-staged = "+"
-renamed = "»"
-deleted = "✘"
+disabled = true  # Keep it simple like the original theme
 
 # Show language versions only when in a project
 [python]
