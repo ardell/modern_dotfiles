@@ -161,3 +161,21 @@ autocmd FileType make setlocal noexpandtab
 " ============================================================================
 set background=dark
 colorscheme default
+
+" ============================================================================
+" Line length indicators
+" Show progressively lighter backgrounds as lines get longer
+" ============================================================================
+
+" Define custom highlight groups for each range
+highlight ColorColumn1 ctermbg=235 guibg=#262626
+highlight ColorColumn2 ctermbg=236 guibg=#303030
+highlight ColorColumn3 ctermbg=237 guibg=#3a3a3a
+
+" Match different column ranges with different background colors
+" 80-99: very dark gray
+call matchadd('ColorColumn1', '\%>79v\%<100v', -1)
+" 100-119: slightly lighter gray
+call matchadd('ColorColumn2', '\%>99v\%<120v', -1)
+" 120+: lighter gray
+call matchadd('ColorColumn3', '\%>119v', -1)
