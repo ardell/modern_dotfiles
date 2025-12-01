@@ -34,6 +34,9 @@ Plug 'sheerun/vim-polyglot'
 " Async linting
 Plug 'dense-analysis/ale'
 
+" Color scheme
+Plug 'altercation/vim-colors-solarized'
+
 call plug#end()
 
 " ============================================================================
@@ -160,7 +163,8 @@ autocmd FileType make setlocal noexpandtab
 " Color scheme
 " ============================================================================
 set background=dark
-colorscheme default
+" Only set colorscheme if it exists (allows PlugInstall to work first)
+silent! colorscheme solarized
 
 " ============================================================================
 " Line length indicators
