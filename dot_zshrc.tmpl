@@ -32,6 +32,9 @@ eval "$($HOME/.local/bin/mise activate zsh)"
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
+# Ruby
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl)"
+
 # Local bin
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
